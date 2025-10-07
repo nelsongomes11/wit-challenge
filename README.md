@@ -1,4 +1,4 @@
-# Visor.ai Challenge
+# WIT Challenge
 
 Weather app built for WIT Web Developer technical challenge.
 
