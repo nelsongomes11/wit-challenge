@@ -26,14 +26,15 @@ function App() {
     error,
   } = useWeather();
 
+  // Yup schema for the city input
+
   const citySchema = Yup.object({
     city: Yup.string()
       .min(2, "City name must be at least 2 characters")
       .required("City name is required"),
   });
 
-  // Temperature Chart
-
+  // Temperature chart data
   const chartData = forecast?.map((day: any) => ({
     date: new Date(day.dt_txt).toLocaleDateString("en-US", {
       weekday: "short",
@@ -113,7 +114,7 @@ function App() {
 
         {/* Weather Cards */}
         <div className="flex items-center justify-center mt-10">
-          {loading && <p className="text-black">Loading...</p>}
+          {loading && <p className="text-white">Loading...</p>}
           {error && <p className="text-red-300">{error}</p>}
           {forecast && (
             <div className="flex flex-col w-full">
@@ -122,6 +123,7 @@ function App() {
                   <ForecastCard key={index} day={day} units={units} />
                 ))}
               </div>
+              {/* Temperature chart */}
               <div className="mt-15 flex items-center justify-center w-full sm:w-3/4  mx-auto">
                 <ResponsiveContainer width="70%" height={300}>
                   <LineChart data={chartData}>
@@ -141,6 +143,7 @@ function App() {
                   </LineChart>
                 </ResponsiveContainer>
               </div>
+              {/* Weather map */}
               {current?.coord?.lat && current?.coord?.lon && (
                 <div className="flex items-center justify-center mt-15">
                   <WeatherMap

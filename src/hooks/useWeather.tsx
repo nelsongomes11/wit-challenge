@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentWeather, get4DayForecast } from "../api/weather";
+import { getCurrentWeather, get5DayForecast } from "../api/weather";
 import type { Units } from "../api/weather";
 
 export interface WeatherData {
@@ -24,10 +24,10 @@ export const useWeather = () => {
 
   const fetchWeather = async () => {
     setCurrent(null); // reset current weather
-    setForecast(null);
+    setForecast(null); // reset forecast weather
     try {
       const currentData = await getCurrentWeather(city, units);
-      const forecastData = await get4DayForecast(city, units);
+      const forecastData = await get5DayForecast(city, units);
 
       setCurrent(currentData);
       setForecast(forecastData);
@@ -42,10 +42,12 @@ export const useWeather = () => {
     }
   };
 
+  // Fetch the weather
   useEffect(() => {
     fetchWeather();
   }, [city, units]);
 
+  // Toggle between units
   const toggleUnits = () => {
     setUnits((prev) => (prev === "metric" ? "imperial" : "metric"));
   };

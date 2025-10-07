@@ -3,6 +3,7 @@ interface ForecastCardProps {
   units: "metric" | "imperial";
 }
 export const ForecastCard = ({ day, units }: ForecastCardProps) => {
+  // Convert date to weekday
   const date = new Date(day.dt * 1000).toLocaleDateString("en-US", {
     weekday: "short",
   });

@@ -2,13 +2,16 @@ import axios from "axios";
 
 export type Units = "metric" | "imperial";
 
+//Load .env variables
 const API_KEY = import.meta.env.VITE_WEATHER_KEY;
 
+// Create base url for axios
 const api = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5",
   timeout: 8000,
 });
 
+// Returns weather for current day
 export const getCurrentWeather = async (city: string, units: Units) => {
   try {
     const res = await api.get("/weather", {
@@ -27,7 +30,8 @@ export const getCurrentWeather = async (city: string, units: Units) => {
   }
 };
 
-export const get4DayForecast = async (city: string, units: Units) => {
+// Returns weather for next 5 days
+export const get5DayForecast = async (city: string, units: Units) => {
   try {
     const res = await api.get("/forecast", {
       params: {
@@ -50,6 +54,7 @@ export const get4DayForecast = async (city: string, units: Units) => {
         item.dt_txt.includes("12:00:00") && !item.dt_txt.startsWith(todayStr) // exclude today if already included
     );
 
+    // Concat arrays
     const dailyForecast = todayForecast
       ? [todayForecast, ...nextDays]
       : nextDays;
