@@ -47,7 +47,7 @@ function App() {
       <div className="min-h-screen bg-zinc-700">
         <div className="flex items-center justify-center p-3">
           <p className="text-xl sm:text-3xl font-bold text-white">
-            WIT'S CHALLENGE
+            Weather App
           </p>
         </div>
         <div className="flex items-center justify-center mt-5">
